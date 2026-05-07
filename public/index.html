@@ -11,7 +11,9 @@
   </head>
   <body>
     <main class="app-shell">
-      <section class="hero-panel">
+      <section class="hero-panel glass-3d">
+        <div class="ambient-orb orb-a"></div>
+        <div class="ambient-orb orb-b"></div>
         <div class="topbar">
           <div>
             <p class="eyebrow">Premium Time Tracker</p>
@@ -23,30 +25,40 @@
           </div>
         </div>
 
+        <div class="live-scroll"><div id="liveScrollTrack">Live focus mode • Track deep work • Stay in flow • </div></div>
+
         <div class="timer-wrap">
           <p id="currentDate">Today</p>
           <div class="timer" id="timer">00:00:00</div>
           <button class="primary-action" id="sessionButton">Start Work</button>
         </div>
+      <div class="countdown-card glass-3d">
+          <p class="eyebrow">Focus Countdown</p>
+          <div class="countdown" id="countdownClock">25:00</div>
+          <div class="countdown-actions">
+            <button class="ghost-button" id="countdownToggle">Start Countdown</button>
+            <button class="ghost-button" id="countdownReset">Reset</button>
+          </div>
+        </div>
       </section>
 
       <section class="stats-grid" aria-label="Analytics dashboard">
-        <article class="stat-card">
+        <article class="stat-card glass-3d">
           <span>Today</span>
           <strong id="todayHours">0h 0m</strong>
         </article>
-        <article class="stat-card">
+        <article class="stat-card glass-3d">
           <span>This Week</span>
           <strong id="weekHours">0h 0m</strong>
         </article>
-        <article class="stat-card">
+        <article class="stat-card glass-3d">
           <span>This Month</span>
           <strong id="monthHours">0h 0m</strong>
         </article>
       </section>
 
       <section class="content-grid">
-        <div class="panel log-panel">
+        <div class="panel log-panel glass-3d">
           <div class="section-head">
             <div>
               <p class="eyebrow">History</p>
@@ -69,7 +81,7 @@
           </div>
         </div>
 
-        <aside class="panel report-panel">
+        <aside class="panel report-panel glass-3d">
           <div class="section-head">
             <div>
               <p class="eyebrow">Share</p>
@@ -84,7 +96,7 @@
     </main>
 
     <div class="modal-backdrop" id="noteModal" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal glass-3d" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <h2 id="modalTitle">Add session notes</h2>
         <p>What did you work on during this session?</p>
         <textarea id="sessionNotes" placeholder="Example: Client dashboard polish, bug fixes, deployment prep"></textarea>
