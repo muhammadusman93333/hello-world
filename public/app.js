@@ -4,6 +4,9 @@ const state = {
   summaries: { today: 0, week: 0, month: 0 },
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
   ticker: null,
+  countdownMs: 25 * 60 * 1000,
+  countdownEnd: null,
+  countdownTicker: null,
 };
 
 const els = {
@@ -24,6 +27,11 @@ const els = {
   sessionNotes: document.querySelector("#sessionNotes"),
   saveStop: document.querySelector("#saveStop"),
   cancelStop: document.querySelector("#cancelStop"),
+  countdownClock: document.querySelector("#countdownClock"),
+  countdownToggle: document.querySelector("#countdownToggle"),
+  countdownReset: document.querySelector("#countdownReset"),
+  liveScrollTrack: document.querySelector("#liveScrollTrack"),
+  tableWrap: document.querySelector(".table-wrap"),
 };
 
 function formatClock(ms) {
@@ -32,6 +40,34 @@ function formatClock(ms) {
   const minutes = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
   const seconds = String(total % 60).padStart(2, "0");
   return `${hours}:${minutes}:${seconds}`;
+}
+
+
+function formatCountdown(ms) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const minutes = String(Math.floor(total / 60)).padStart(2, "0");
+  const seconds = String(total % 60).padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}
+
+function updateCountdown() {
+  if (!state.countdownEnd) {
+    els.countdownClock.textContent = formatCountdown(state.countdownMs);
+    els.countdownToggle.textContent = "Start Countdown";
+    return;
+  }
+
+  const remaining = state.countdownEnd - Date.now();
+  state.countdownMs = Math.max(0, remaining);
+  els.countdownClock.textContent = formatCountdown(state.countdownMs);
+  els.countdownToggle.textContent = "Pause Countdown";
+
+  if (remaining <= 0) {
+    state.countdownEnd = null;
+    state.countdownMs = 25 * 60 * 1000;
+    els.countdownToggle.textContent = "Start Countdown";
+    els.copyStatus.textContent = "⏰ Countdown complete";
+  }
 }
 
 function formatHuman(ms) {
@@ -111,6 +147,7 @@ function render() {
   }).format(new Date());
 
   renderLogs();
+  els.tableWrap.classList.toggle("auto-scroll", state.logs.length > 6);
   renderReport();
   updateTimer();
 }
@@ -229,3 +266,23 @@ els.copyReport.addEventListener("click", async () => {
 
 state.ticker = window.setInterval(updateTimer, 1000);
 api("/api/logs").then(applyData).catch(alert);
+
+
+els.countdownToggle.addEventListener("click", () => {
+  if (state.countdownEnd) {
+    state.countdownMs = Math.max(0, state.countdownEnd - Date.now());
+    state.countdownEnd = null;
+  } else {
+    state.countdownEnd = Date.now() + state.countdownMs;
+  }
+  updateCountdown();
+});
+
+els.countdownReset.addEventListener("click", () => {
+  state.countdownEnd = null;
+  state.countdownMs = 25 * 60 * 1000;
+  updateCountdown();
+});
+
+state.countdownTicker = window.setInterval(updateCountdown, 250);
+updateCountdown();

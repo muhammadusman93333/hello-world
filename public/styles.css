@@ -87,3 +87,14 @@ textarea, .note-input { width:100%; border-radius:12px; border:1px solid rgba(25
   .stats-grid { grid-template-columns: 1fr; }
   .timer { font-size: clamp(2.6rem, 16vw, 4.4rem); }
 }
+
+.live-scroll { position: relative; margin-top: 18px; overflow: hidden; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); }
+#liveScrollTrack { white-space: nowrap; padding: 10px 0; opacity: .85; font-size: .9rem; letter-spacing: .06em; animation: marquee 18s linear infinite; }
+.countdown-card { margin-top: 18px; border-radius: 20px; padding: 16px; display: grid; gap: 10px; max-width: 360px; }
+.countdown { font-size: clamp(2rem, 8vw, 2.8rem); font-weight: 800; font-variant-numeric: tabular-nums; }
+.countdown-actions { display: flex; gap: 10px; }
+.log-panel tbody tr { transition: transform 180ms ease, background 180ms ease; }
+.log-panel tbody tr:hover { transform: translateX(6px); background: rgba(255,255,255,.04); }
+.table-wrap.auto-scroll { animation: subtle-scroll 12s ease-in-out infinite alternate; }
+@keyframes marquee { from { transform: translateX(0%);} to { transform: translateX(-50%);} }
+@keyframes subtle-scroll { from { box-shadow: inset 0 -8px 16px rgba(0,0,0,0); } to { box-shadow: inset 0 -16px 20px rgba(0,0,0,.35); } }
