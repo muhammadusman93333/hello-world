@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <div class="bg-orb orb-one"></div>
+    <div class="bg-orb orb-two"></div>
     <main class="app-shell">
       <section class="hero-panel">
-        <div class="topbar">
+        <div class="hero-glow"></div>
+        <div class="topbar glass-card elevated">
           <div>
             <p class="eyebrow">Premium Time Tracker</p>
             <h1>PulseTime</h1>
@@ -23,7 +26,7 @@
           </div>
         </div>
 
-        <div class="timer-wrap">
+        <div class="timer-wrap glass-card elevated">
           <p id="currentDate">Today</p>
           <div class="timer" id="timer">00:00:00</div>
           <button class="primary-action" id="sessionButton">Start Work</button>
@@ -31,22 +34,22 @@
       </section>
 
       <section class="stats-grid" aria-label="Analytics dashboard">
-        <article class="stat-card">
+        <article class="stat-card glass-card elevated">
           <span>Today</span>
           <strong id="todayHours">0h 0m</strong>
         </article>
-        <article class="stat-card">
+        <article class="stat-card glass-card elevated">
           <span>This Week</span>
           <strong id="weekHours">0h 0m</strong>
         </article>
-        <article class="stat-card">
+        <article class="stat-card glass-card elevated">
           <span>This Month</span>
           <strong id="monthHours">0h 0m</strong>
         </article>
       </section>
 
       <section class="content-grid">
-        <div class="panel log-panel">
+        <div class="panel log-panel glass-card elevated">
           <div class="section-head">
             <div>
               <p class="eyebrow">History</p>
@@ -69,7 +72,7 @@
           </div>
         </div>
 
-        <aside class="panel report-panel">
+        <aside class="panel report-panel glass-card elevated">
           <div class="section-head">
             <div>
               <p class="eyebrow">Share</p>
@@ -84,7 +87,7 @@
     </main>
 
     <div class="modal-backdrop" id="noteModal" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal glass-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <h2 id="modalTitle">Add session notes</h2>
         <p>What did you work on during this session?</p>
         <textarea id="sessionNotes" placeholder="Example: Client dashboard polish, bug fixes, deployment prep"></textarea>
